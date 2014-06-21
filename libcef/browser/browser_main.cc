@@ -29,8 +29,11 @@
 #if defined(USE_AURA)
 #include "ui/aura/env.h"
 #include "ui/gfx/screen.h"
+#if defined(TOOLKIT_VIEWS)
 #include "ui/views/test/desktop_test_views_delegate.h"
 #include "ui/views/widget/desktop_aura/desktop_screen.h"
+#endif
+#include "ui/aura/test/test_screen.h"
 
 #if defined(OS_WIN)
 #include "ui/base/cursor/cursor_loader_win.h"
@@ -74,8 +77,10 @@ void CefBrowserMainParts::ToolkitInitialized() {
 #if defined(USE_AURA)
   CHECK(aura::Env::GetInstance());
 
+#if defined(TOOLKIT_VIEWS)
   DCHECK(!views::ViewsDelegate::views_delegate);
   new views::DesktopTestViewsDelegate;
+#endif
 
 #if defined(OS_WIN)
   ui::CursorLoaderWin::SetCursorResourceModule(
@@ -105,8 +110,14 @@ int CefBrowserMainParts::PreCreateThreads() {
   content::GpuDataManager::GetInstance();
 
 #if defined(USE_AURA)
+  #if defined(TOOLKIT_VIEWS)
   gfx::Screen::SetScreenInstance(gfx::SCREEN_TYPE_NATIVE,
                                  views::CreateDesktopScreen());
+  #else
+  aura::TestScreen* screen = aura::TestScreen::Create();
+  gfx::Screen::SetScreenInstance(gfx::SCREEN_TYPE_NATIVE,
+       screen);
+  #endif
 #endif
 
   // Initialize user preferences.
@@ -182,7 +193,9 @@ void CefBrowserMainParts::PostDestroyThreads() {
 
 #if defined(USE_AURA)
   aura::Env::DeleteInstance();
+#if defined(TOOLKIT_VIEWS)
   delete views::ViewsDelegate::views_delegate;
+#endif //TOOLKIT_VIEWS
 #endif
 
   PlatformCleanup();

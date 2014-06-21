@@ -4,8 +4,11 @@
 
 #include "cefsimple/simple_handler.h"
 
+#ifdef USE_X11
 #include <X11/Xatom.h>
 #include <X11/Xlib.h>
+#endif
+
 #include <string>
 
 #include "include/cef_browser.h"

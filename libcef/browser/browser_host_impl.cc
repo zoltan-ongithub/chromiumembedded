@@ -1386,7 +1386,7 @@ void CefBrowserHostImpl::DestroyBrowser() {
   web_contents_.reset(NULL);
   menu_creator_.reset(NULL);
 
-#if defined(USE_AURA)
+#if defined(USE_AURA) and defined(TOOLKIT_VIEWS)
   window_widget_ = NULL;
 #endif
 
@@ -1400,7 +1400,7 @@ void CefBrowserHostImpl::DestroyBrowser() {
 
 gfx::NativeView CefBrowserHostImpl::GetContentView() const {
   CEF_REQUIRE_UIT();
-#if defined(USE_AURA)
+#if defined(USE_AURA) and defined(TOOLKIT_VIEWS)
   if (!window_widget_)
     return NULL;
   return window_widget_->GetNativeView();
@@ -2639,7 +2639,7 @@ CefBrowserHostImpl::CefBrowserHostImpl(
       devtools_frontend_(NULL),
       file_chooser_pending_(false),
       weak_ptr_factory_(this) {
-#if defined(USE_AURA)
+#if defined(USE_AURA) and defined(TOOLKIT_VIEWS)
   window_widget_ = NULL;
 #endif
 #if defined(USE_X11)
