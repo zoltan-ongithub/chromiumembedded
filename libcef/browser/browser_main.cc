@@ -114,7 +114,7 @@ int CefBrowserMainParts::PreCreateThreads() {
   gfx::Screen::SetScreenInstance(gfx::SCREEN_TYPE_NATIVE,
                                  views::CreateDesktopScreen());
   #else
-  aura::TestScreen* screen = aura::TestScreen::Create();
+  aura::TestScreen* screen = aura::TestScreen::Create(gfx::Size());
   gfx::Screen::SetScreenInstance(gfx::SCREEN_TYPE_NATIVE,
        screen);
   #endif

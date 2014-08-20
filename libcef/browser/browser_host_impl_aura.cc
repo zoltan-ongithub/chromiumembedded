@@ -43,7 +43,7 @@ bool CefBrowserHostImpl::PlatformCreateWindow() {
   gfx::Size default_window_size(640, 480);
 
 
-  aura::TestScreen* screen = aura::TestScreen::Create();
+  aura::TestScreen* screen = aura::TestScreen::Create(gfx::Size());
 
   gfx::Screen::SetScreenInstance(gfx::SCREEN_TYPE_NATIVE, screen);
 
