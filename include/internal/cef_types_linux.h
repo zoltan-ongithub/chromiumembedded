@@ -43,7 +43,12 @@ typedef struct _XDisplay XDisplay;
 #include "include/internal/cef_string.h"
 
 // Handle types.
+#if defined(USE_X11)
 #define cef_cursor_handle_t unsigned long
+#else
+#define cef_cursor_handle_t void*
+#endif
+
 #define cef_event_handle_t base::NativeEvent
 #define cef_window_handle_t unsigned long
 
