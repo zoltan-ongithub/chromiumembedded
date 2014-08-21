@@ -15,6 +15,6 @@
 
 void SimpleHandler::OnTitleChange(CefRefPtr<CefBrowser> browser,
                                   const CefString& title) {
-  REQUIRE_UI_THREAD();
+  CEF_REQUIRE_UI_THREAD();
 }
 
