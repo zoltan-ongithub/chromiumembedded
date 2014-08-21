@@ -11,7 +11,6 @@
 
 #include <string>
 
-#include "cefsimple/util.h"
 #include "include/cef_browser.h"
 
 void SimpleHandler::OnTitleChange(CefRefPtr<CefBrowser> browser,

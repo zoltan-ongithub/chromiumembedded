@@ -73,8 +73,10 @@ bool CefMenuCreatorRunnerLinux::RunContextMenu(CefMenuCreator* manager) {
 }
 
 void CefMenuCreatorRunnerLinux::CancelContextMenu() {
+#if defined(TOOKIT_VIEWS)
   if (menu_)
     menu_->Cancel();
+#endif
 }
 
 bool CefMenuCreatorRunnerLinux::FormatLabel(base::string16& label) {
