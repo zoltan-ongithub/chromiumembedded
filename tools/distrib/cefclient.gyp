@@ -207,7 +207,7 @@
             '<@(cefclient_sources_mac)',
           ],
         }],
-        [ 'OS=="linux" or OS=="freebsd" or OS=="openbsd"', {
+        [ 'use_ozone==0 and OS=="linux" or OS=="freebsd" or OS=="openbsd"', {
           'copies': [
             {
               'destination': '<(PRODUCT_DIR)/files',
@@ -429,7 +429,7 @@
             '<@(cefsimple_sources_mac)',
           ],
         }],
-        [ 'OS=="linux" or OS=="freebsd" or OS=="openbsd"', {
+        [ 'use_ozone==0 and OS=="linux" or OS=="freebsd" or OS=="openbsd"', {
           'copies': [
             {
               'destination': '<(PRODUCT_DIR)/',
@@ -626,7 +626,7 @@
         },  # target cefsimple_helper_app
       ],
     }],  # OS=="mac"
-    [ 'OS=="linux" or OS=="freebsd" or OS=="openbsd"', {
+    [ 'use_ozone==0 or OS=="linux" or OS=="freebsd" or OS=="openbsd"', {
       'targets': [
         {
           'target_name': 'gtk',

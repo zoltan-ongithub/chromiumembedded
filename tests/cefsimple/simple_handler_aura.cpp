@@ -8,9 +8,8 @@
 #include <X11/Xatom.h>
 #include <X11/Xlib.h>
 #endif
-
 #include <string>
-
+#include "include/wrapper/cef_helpers.h"
 #include "include/cef_browser.h"
 
 void SimpleHandler::OnTitleChange(CefRefPtr<CefBrowser> browser,

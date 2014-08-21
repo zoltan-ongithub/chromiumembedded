@@ -178,17 +178,21 @@
             '<@(cefclient_sources_mac)',
           ],
         }],
-        [ 'use_ozone==0 and OS=="linux" or OS=="freebsd" or OS=="openbsd"', {
-          'dependencies': [
+        [ 'use_ozone==0', {
+            'dependencies': [
             'gtk',
             'gtkglext',
-            'libcef',
           ],
           'link_settings': {
             'libraries': [
               '-lX11',
             ],
           },
+        }],
+        [ 'OS=="linux" or OS=="freebsd" or OS=="openbsd"', {
+          'dependencies': [
+            'libcef',
+          ],
           'sources': [
             '<@(includes_linux)',
             '<@(cefclient_sources_linux)',
@@ -358,7 +362,7 @@
             '<@(cefsimple_sources_mac)',
           ],
         }],
-        [ 'OS=="linux" or OS=="freebsd" or OS=="openbsd"', {
+        [ 'use_ozone==0 and OS=="linux" or OS=="freebsd" or OS=="openbsd"', {
           'dependencies': [
             'libcef',
           ],
