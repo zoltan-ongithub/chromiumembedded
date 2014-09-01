@@ -874,6 +874,7 @@
         '<(DEPTH)/v8/tools/gyp/v8.gyp:v8',
         '<(DEPTH)/webkit/storage_browser.gyp:webkit_storage_browser',
         '<(DEPTH)/webkit/storage_common.gyp:webkit_storage_common',
+        '<(DEPTH)/ppapi/ppapi_internal.gyp:ppapi_proxy',
         # Necessary to generate the grit include files.
         'cef_pak',
       ],
