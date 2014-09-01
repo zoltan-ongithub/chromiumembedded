@@ -27,7 +27,7 @@
     'toolkit_views' :0,
     'use_cups' :0,
     'use_gnome_keyring': 0,
-    'use_openssl' : 1,
+    'use_openssl' : 0,
     'linux_link_gnome_keyring': 0,
   },
 }
