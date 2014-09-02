@@ -23,6 +23,7 @@
 #include "ui/aura/test/test_screen.h"
 #include "ui/aura/window.h"
 #include "ui/aura/window_event_dispatcher.h"
+#include "ui/ozone/public/cursor_factory_ozone.h"
 
 namespace {
 
@@ -35,6 +36,13 @@ long GetSystemUptime() {
 }
 
 }  // namespace
+
+
+ui::PlatformCursor CefBrowserHostImpl::GetPlatformCursor(
+    blink::WebCursorInfo::Type type){
+
+  return ui::CursorFactoryOzone::GetInstance()->GetDefaultCursor(type);
+}
 
 bool CefBrowserHostImpl::PlatformCreateWindow() {
 
@@ -69,7 +77,6 @@ void CefBrowserHostImpl::PlatformSizeTo(int width, int height) {
 void CefBrowserHostImpl::PlatformSetFocus(bool focus) {
   if (!focus)
     return;
-
   if (web_contents_) {
     // Give logical focus to the RenderWidgetHostViewAura in the views
     // hierarchy. This does not change the native keyboard focus.
