@@ -362,6 +362,17 @@
             '<@(cefsimple_sources_mac)',
           ],
         }],
+
+
+        [ 'use_ozone==1 and OS=="linux" or OS=="freebsd" or OS=="openbsd"', {
+          'dependencies': [
+            'libcef',
+          ],
+          'sources': [
+            '<@(includes_linux)',
+            '<@(cefsimple_sources_linux)',
+          ],
+        }],
         [ 'use_ozone==0 and OS=="linux" or OS=="freebsd" or OS=="openbsd"', {
           'dependencies': [
             'libcef',
@@ -1197,8 +1208,9 @@
             'libcef/browser/javascript_dialog_linux.cc',
             'libcef/browser/menu_creator_runner_linux.cc',
             'libcef/browser/menu_creator_runner_linux.h',
-            'libcef/browser/window_x11.cc',
-            'libcef/browser/window_x11.h',
+            'libcef/browser/printing/print_dialog_linux.cc',
+            'libcef/browser/printing/print_dialog_linux.h',
+            'libcef/browser/render_widget_host_view_osr_linux.cc',
             #Include sources for printing.
             '<(DEPTH)/chrome/renderer/printing/print_web_view_helper_linux.cc',
           ],
