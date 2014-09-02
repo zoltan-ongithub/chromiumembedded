@@ -17,6 +17,7 @@
      # Ozone has electrolytes
     'use_ozone' : 1,
     'embedded' : 1,
+    'enable_plugins' : 1,
     'enable_webrtc' : 0,
     'use_pulseaudio' :0,
     'use_dbus' :0,
