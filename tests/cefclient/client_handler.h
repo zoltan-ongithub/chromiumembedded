@@ -16,7 +16,7 @@
 #include "include/wrapper/cef_helpers.h"
 #include "include/wrapper/cef_message_router.h"
 
-#if defined(OS_LINUX)
+#if defined(OS_LINUX) && !defined(USE_AURA)
 // The Linux client uses GTK instead of the underlying platform type (X11).
 #include <gtk/gtk.h>
 #define ClientWindowHandle GtkWidget*

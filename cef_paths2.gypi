@@ -89,7 +89,7 @@
     ],
     'includes_linux': [
       'include/base/internal/cef_atomicops_atomicword_compat.h',
-      'include/base/internal/cef_atomicops_x86_gcc.h',
+      'include/base/internal/cef_atomicops.h',
       'include/internal/cef_linux.h',
       'include/internal/cef_types_linux.h',
     ],
@@ -104,7 +104,6 @@
       '<@(autogen_library_side)',
     ],
     'libcef_dll_wrapper_sources_common': [
-      'libcef_dll/base/cef_atomicops_x86_gcc.cc',
       'libcef_dll/base/cef_bind_helpers.cc',
       'libcef_dll/base/cef_callback_helpers.cc',
       'libcef_dll/base/cef_callback_internal.cc',
@@ -291,7 +290,7 @@
     ],
     'cefsimple_sources_linux': [
       'tests/cefsimple/cefsimple_linux.cpp',
-      'tests/cefsimple/simple_handler_linux.cpp',
+      'tests/cefsimple/simple_handler_aura.cpp',
     ],
   },
 }

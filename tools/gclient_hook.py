@@ -35,5 +35,9 @@ if not 'DEPOT_TOOLS_WIN_TOOLCHAIN' in os.environ.keys():
   os.environ['DEPOT_TOOLS_WIN_TOOLCHAIN'] = '0'
 
 os.environ['CEF_DIRECTORY'] = os.path.basename(cef_dir)
+
 gyper = [ 'python', '../build/gyp_chromium', 'cef.gyp', '-I', 'cef.gypi' ]
+
+if len(sys.argv)>1:
+    gyper += sys.argv[1:]
 RunAction(cef_dir, gyper)

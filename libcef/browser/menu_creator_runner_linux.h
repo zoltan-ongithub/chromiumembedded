@@ -22,7 +22,9 @@ class CefMenuCreatorRunnerLinux: public CefMenuCreator::Runner {
   virtual bool FormatLabel(base::string16& label) OVERRIDE;
 
  private:
+#if defined(TOOLKIT_VIEWS)
   scoped_ptr<views::MenuRunner> menu_;
+#endif
 };
 
 #endif  // CEF_LIBCEF_BROWSER_MENU_MANAGER_RUNNER_LINUX_H_

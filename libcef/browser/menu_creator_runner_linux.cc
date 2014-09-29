@@ -4,7 +4,12 @@
 
 #include "libcef/browser/menu_creator_runner_linux.h"
 #include "libcef/browser/browser_host_impl.h"
+
+#if !defined(USE_AURA)
 #include "libcef/browser/window_x11.h"
+#else
+#include "ui/views/widget/widget.h"
+#endif
 
 #include "base/strings/string_util.h"
 #include "ui/aura/window.h"
@@ -22,7 +27,10 @@ CefMenuCreatorRunnerLinux::~CefMenuCreatorRunnerLinux() {
 }
 
 bool CefMenuCreatorRunnerLinux::RunContextMenu(CefMenuCreator* manager) {
-  menu_.reset(new views::MenuRunner(manager->model()));
+
+#if !defined(TOOKIT_VIEWS)
+    return false;
+#else
 
   gfx::Point screen_point;
 
@@ -60,13 +68,15 @@ bool CefMenuCreatorRunnerLinux::RunContextMenu(CefMenuCreator* manager) {
                        ui::MENU_SOURCE_NONE,
                        views::MenuRunner::CONTEXT_MENU);
   UNUSED(result);
-
+#endif
   return true;
 }
 
 void CefMenuCreatorRunnerLinux::CancelContextMenu() {
+#if defined(TOOKIT_VIEWS)
   if (menu_)
     menu_->Cancel();
+#endif
 }
 
 bool CefMenuCreatorRunnerLinux::FormatLabel(base::string16& label) {

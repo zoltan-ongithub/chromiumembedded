@@ -19,7 +19,7 @@
 #include "libcef/browser/javascript_dialog_manager.h"
 #include "libcef/browser/menu_creator.h"
 #include "libcef/common/response_manager.h"
-
+#include "libcef/browser/cef_platform_data_aura.h"
 #include "base/memory/scoped_ptr.h"
 #include "base/memory/weak_ptr.h"
 #include "base/strings/string16.h"
@@ -34,6 +34,7 @@
 #if defined(USE_AURA)
 #include "third_party/WebKit/public/platform/WebCursorInfo.h"
 #include "ui/base/cursor/cursor.h"
+#include "ui/aura/window.h"
 #endif
 
 #if defined(USE_X11)
@@ -278,7 +279,7 @@ class CefBrowserHostImpl : public CefBrowserHost,
   CefRefPtr<CefClient> client() const { return client_; }
   int browser_id() const;
 
-#if defined(USE_AURA)
+#if defined(USE_AURA) and defined(TOOLKIT_VIEWS)
   views::Widget* window_widget() const { return window_widget_; }
 #endif
 
@@ -657,8 +658,13 @@ class CefBrowserHostImpl : public CefBrowserHost,
 #if defined(USE_AURA)
   // Widget hosting the web contents. It will be deleted automatically when the
   // associated root window is destroyed.
+#if defined(TOOLKIT_VIEWS)
   views::Widget* window_widget_;
+#endif //defined(TOOLKIT_VIEWS)
+  aura::Window* window_;
+  cef::PlatformDataAura* platform_ = NULL;
 #endif  // defined(USE_AURA)
+
 #if defined(USE_X11)
   CefWindowX11* window_x11_;
   scoped_ptr<ui::XScopedCursor> invisible_cursor_;

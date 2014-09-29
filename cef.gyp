@@ -178,17 +178,21 @@
             '<@(cefclient_sources_mac)',
           ],
         }],
-        [ 'OS=="linux" or OS=="freebsd" or OS=="openbsd"', {
-          'dependencies': [
+        [ 'use_ozone==0', {
+            'dependencies': [
             'gtk',
             'gtkglext',
-            'libcef',
           ],
           'link_settings': {
             'libraries': [
               '-lX11',
             ],
           },
+        }],
+        [ 'OS=="linux" or OS=="freebsd" or OS=="openbsd"', {
+          'dependencies': [
+            'libcef',
+          ],
           'sources': [
             '<@(includes_linux)',
             '<@(cefclient_sources_linux)',
@@ -358,7 +362,18 @@
             '<@(cefsimple_sources_mac)',
           ],
         }],
-        [ 'OS=="linux" or OS=="freebsd" or OS=="openbsd"', {
+
+
+        [ 'use_ozone==1 and OS=="linux" or OS=="freebsd" or OS=="openbsd"', {
+          'dependencies': [
+            'libcef',
+          ],
+          'sources': [
+            '<@(includes_linux)',
+            '<@(cefsimple_sources_linux)',
+          ],
+        }],
+        [ 'use_ozone==0 and OS=="linux" or OS=="freebsd" or OS=="openbsd"', {
           'dependencies': [
             'libcef',
           ],
@@ -870,6 +885,7 @@
         '<(DEPTH)/v8/tools/gyp/v8.gyp:v8',
         '<(DEPTH)/webkit/storage_browser.gyp:webkit_storage_browser',
         '<(DEPTH)/webkit/storage_common.gyp:webkit_storage_common',
+        '<(DEPTH)/ppapi/ppapi_internal.gyp:ppapi_proxy',
         # Necessary to generate the grit include files.
         'cef_pak',
       ],
@@ -1167,7 +1183,7 @@
             '<(DEPTH)/chrome/browser/ui/cocoa/nsview_additions.mm',
           ],
         }],
-        [ 'OS=="linux" or OS=="freebsd" or OS=="openbsd"', {
+        [ 'use_ozone==0 and OS=="linux" or OS=="freebsd" or OS=="openbsd"', {
           'sources': [
             '<@(includes_linux)',
             'libcef/browser/browser_host_impl_linux.cc',
@@ -1184,12 +1200,40 @@
             '<(DEPTH)/chrome/renderer/printing/print_web_view_helper_linux.cc',
           ],
         }],
+        [ 'use_ozone==1 and OS=="linux" or OS=="freebsd" or OS=="openbsd"', {
+          'sources': [
+            '<@(includes_linux)',
+            'libcef/browser/browser_host_impl_aura.cc',
+            'libcef/browser/browser_main_linux.cc',
+            'libcef/browser/javascript_dialog_linux.cc',
+            'libcef/browser/menu_creator_runner_linux.cc',
+            'libcef/browser/menu_creator_runner_linux.h',
+            'libcef/browser/printing/print_dialog_linux.cc',
+            'libcef/browser/printing/print_dialog_linux.h',
+            'libcef/browser/render_widget_host_view_osr_linux.cc',
+            #Include sources for printing.
+            '<(DEPTH)/chrome/renderer/printing/print_web_view_helper_linux.cc',
+          ],
+        }],
         ['os_posix == 1 and OS != "mac" and android_webview_build != 1', {
           'dependencies': [
             '<(DEPTH)/components/components.gyp:breakpad_host',
           ],
         }],
-        ['use_aura==1', {
+         ['use_aura==1 and toolkit_views==0', {
+               'sources': [
+                    'libcef/browser/cef_platform_data_aura.cc',
+                ],
+               'dependencies' : [
+                    # TODO: We need to replace the test implementations
+                    # with our own classes.
+                    '../ui/aura/aura.gyp:aura_test_support',
+                    '../base/base.gyp:test_support_base',
+                    '../ui/events/events.gyp:events',
+                    '../ui/wm/wm.gyp:wm',
+                ],
+        }],
+        ['use_aura==1 and toolkit_views==1', {
           'dependencies': [
             '<(DEPTH)/ui/views/controls/webview/webview.gyp:webview',
             '<(DEPTH)/ui/views/views.gyp:views',
@@ -1613,7 +1657,7 @@
         ],
       }],
     }],  # OS!="mac"
-    [ 'OS=="linux" or OS=="freebsd" or OS=="openbsd"', {
+    [ 'use_ozone==0 and OS=="linux" or OS=="freebsd" or OS=="openbsd"', {
       'targets': [
         {
           'target_name': 'gtk',

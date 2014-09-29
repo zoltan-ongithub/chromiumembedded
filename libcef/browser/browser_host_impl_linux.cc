@@ -10,7 +10,11 @@
 
 #include "libcef/browser/context.h"
 #include "libcef/browser/window_delegate_view.h"
+
+#ifdef USE_X11
 #include "libcef/browser/window_x11.h"
+#endif
+
 #include "libcef/browser/thread_util.h"
 
 #include "base/bind.h"
