@@ -1,0 +1,34 @@
+diff --git a/build/common.gypi b/build/common.gypi
+index 7150b3c..497b18f 100644
+--- a/build/common.gypi
++++ b/build/common.gypi
+@@ -1440,6 +1440,7 @@
+     'ozone_platform_gbm%': 0,
+     'ozone_platform_ozonex%': 0,
+     'ozone_platform_test%': 0,
++    'ozone_platform_egl%': 0,
+ 
+     # Chrome OS: whether to build ChromeVox from sources in the Chromium
+     # repository rather than using precompiled JavaScript in
+@@ -2211,6 +2212,7 @@
+         'ozone_platform_dri%': 1,
+         'ozone_platform_test%': 1,
+         'ozone_platform_egltest%': 1,
++       'ozone_platform_egl%': 1,
+       }],
+ 
+       ['use_ozone==1 and ozone_auto_platforms==1 and chromeos==1', {
+diff --git a/media/ozone/media_ozone_platform.cc b/media/ozone/media_ozone_platform.cc
+index 804de37..fb351aa 100644
+--- a/media/ozone/media_ozone_platform.cc
++++ b/media/ozone/media_ozone_platform.cc
+@@ -40,6 +40,9 @@ MediaOzonePlatform* CreateMediaOzonePlatformEgltest() {
+   return new MediaOzonePlatformStub;
+ }
+ 
++MediaOzonePlatform* CreateMediaOzonePlatformEgl() {
++  return new MediaOzonePlatformStub;
++}
+ MediaOzonePlatform* CreateMediaOzonePlatformGbm() {
+   return new MediaOzonePlatformStub;
+ }
