@@ -1,8 +1,8 @@
 diff --git a/build/common.gypi b/build/common.gypi
 index 7150b3c..9176bbb 100644
---- a/build/common.gypi
-+++ b/build/common.gypi
-@@ -775,7 +775,7 @@
+--- build/common.gypi
++++ build/common.gypi
+@@ -778,7 +778,7 @@
          }],
  
          # Whether PPAPI is enabled.
@@ -13,8 +13,8 @@ index 7150b3c..9176bbb 100644
            'enable_plugins%': 1,
 diff --git a/content/content_renderer.gypi b/content/content_renderer.gypi
 index ddc0bc3..26a4eca 100644
---- a/content/content_renderer.gypi
-+++ b/content/content_renderer.gypi
+--- content/content_renderer.gypi
++++ content/content_renderer.gypi
 @@ -840,6 +840,9 @@
        'sources': [
          '<@(private_renderer_plugin_sources)',
