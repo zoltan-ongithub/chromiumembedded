@@ -1,7 +1,7 @@
 diff --git a/cc/resources/resource_provider.h b/cc/resources/resource_provider.h
 index e56f9f9..2db70b9 100644
---- a/cc/resources/resource_provider.h
-+++ b/cc/resources/resource_provider.h
+--- cc/resources/resource_provider.h
++++ cc/resources/resource_provider.h
 @@ -660,7 +660,7 @@ class CC_EXPORT ResourceProvider {
    DISALLOW_COPY_AND_ASSIGN(ResourceProvider);
  };
