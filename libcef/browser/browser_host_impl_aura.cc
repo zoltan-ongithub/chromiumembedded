@@ -14,6 +14,7 @@
 
 #include "ui/views/widget/desktop_aura/desktop_native_widget_aura.h"
 #include "base/bind.h"
+#include "base/threading/thread_restrictions.h"
 #include "content/public/browser/native_web_keyboard_event.h"
 #include "content/public/common/file_chooser_params.h"
 #include "content/public/common/renderer_preferences.h"
@@ -47,9 +48,12 @@ ui::PlatformCursor CefBrowserHostImpl::GetPlatformCursor(
 bool CefBrowserHostImpl::PlatformCreateWindow() {
 
   CHECK(!platform_);
+  /* TODO: Input device enumartion in the DeviceManager fails if we
+   * dont allow IO on this thread.
+   */
+  base::ThreadRestrictions::SetIOAllowed(true);
 
   gfx::Size default_window_size(640, 480);
-
 
   aura::TestScreen* screen = aura::TestScreen::Create(gfx::Size());
 
