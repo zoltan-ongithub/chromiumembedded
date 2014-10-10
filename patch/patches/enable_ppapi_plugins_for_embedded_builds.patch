@@ -1,0 +1,27 @@
+diff --git a/build/common.gypi b/build/common.gypi
+index 7150b3c..9176bbb 100644
+--- a/build/common.gypi
++++ b/build/common.gypi
+@@ -775,7 +775,7 @@
+         }],
+ 
+         # Whether PPAPI is enabled.
+-        ['OS=="android" or OS=="ios" or embedded==1', {
++        ['OS=="android" or OS=="ios"', {
+           'enable_plugins%': 0,
+         }, {
+           'enable_plugins%': 1,
+diff --git a/content/content_renderer.gypi b/content/content_renderer.gypi
+index ddc0bc3..26a4eca 100644
+--- a/content/content_renderer.gypi
++++ b/content/content_renderer.gypi
+@@ -840,6 +840,9 @@
+       'sources': [
+         '<@(private_renderer_plugin_sources)',
+       ],
++      'include_dirs': [
++         '<(DEPTH)/third_party/libyuv/include',
++      ],
+       'dependencies': [
+         '../ppapi/ppapi_internal.gyp:ppapi_host',
+         '../ppapi/ppapi_internal.gyp:ppapi_proxy',

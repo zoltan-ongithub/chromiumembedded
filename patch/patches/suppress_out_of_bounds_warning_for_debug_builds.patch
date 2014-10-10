@@ -1,0 +1,21 @@
+diff --git a/cc/resources/resource_provider.h b/cc/resources/resource_provider.h
+index e56f9f9..2db70b9 100644
+--- a/cc/resources/resource_provider.h
++++ b/cc/resources/resource_provider.h
+@@ -660,7 +660,7 @@ class CC_EXPORT ResourceProvider {
+   DISALLOW_COPY_AND_ASSIGN(ResourceProvider);
+ };
+ 
+-
++#pragma GCC diagnostic ignored "-Warray-bounds"
+ // TODO(epenner): Move these format conversions to resource_format.h
+ // once that builds on mac (npapi.h currently #includes OpenGL.h).
+ inline unsigned BitsPerPixel(ResourceFormat format) {
+@@ -675,6 +675,7 @@ inline unsigned BitsPerPixel(ResourceFormat format) {
+   };
+   return format_bits_per_pixel[format];
+ }
++#pragma GCC diagnostic error "-Warray-bounds"
+ 
+ inline GLenum GLDataType(ResourceFormat format) {
+   DCHECK_LE(format, RESOURCE_FORMAT_MAX);
