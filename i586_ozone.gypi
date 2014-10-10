@@ -21,6 +21,7 @@
     'use_pulseaudio' :0,
     'use_dbus' :0,
     'ozone_platform_dri' :1,
+    'ozone_platform_egl' :1,
     'ozone_platform_test' :1,
     'include_tests' :0,
     'enable_printing' : 1,
