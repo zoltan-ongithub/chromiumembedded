@@ -40,7 +40,7 @@ void SimpleApp::OnContextInitialized() {
       CefCommandLine::GetGlobalCommandLine();
   url = command_line->GetSwitchValue("url");
   if (url.empty())
-    url = "http://www.google.com";
+    url = "http://www.bing.com";
 
   // Create the first browser window.
   CefBrowserHost::CreateBrowser(window_info, handler.get(), url,
