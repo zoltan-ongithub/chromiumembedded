@@ -18,6 +18,21 @@ index 7150b3c..497b18f 100644
        }],
  
        ['use_ozone==1 and ozone_auto_platforms==1 and chromeos==1', {
+diff --git a/ui/ozone/ozone.gyp b/ui/ozone/ozone.gyp
+index 65ab0a2..5775dcf 100644
+--- ui/ozone/ozone.gyp
++++ ui/ozone/ozone.gyp
+@@ -198,5 +198,10 @@
+         'platform/test/test.gypi',
+       ],
+     }],
++    ['<(ozone_platform_egl) == 1', {
++      'includes': [
++        'platform/egl/egl.gypi',
++      ],
++    }],
+   ],
+ }
 diff --git a/media/ozone/media_ozone_platform.cc b/media/ozone/media_ozone_platform.cc
 index 804de37..fb351aa 100644
 --- media/ozone/media_ozone_platform.cc
