@@ -104,6 +104,7 @@
       '<@(autogen_library_side)',
     ],
     'libcef_dll_wrapper_sources_common': [
+      'libcef_dll/base/cef_atomicops_x86_gcc.cc',
       'libcef_dll/base/cef_bind_helpers.cc',
       'libcef_dll/base/cef_callback_helpers.cc',
       'libcef_dll/base/cef_callback_internal.cc',
