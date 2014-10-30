@@ -26,6 +26,11 @@
 #include "ui/aura/window_event_dispatcher.h"
 #include "ui/ozone/public/cursor_factory_ozone.h"
 
+#include <fcntl.h>    /* For O_RDWR */
+#include <unistd.h>   /* For open(), creat() */
+#include <linux/fb.h>
+#include <sys/ioctl.h>
+
 namespace {
 
 // Returns the number of seconds since system boot.
@@ -53,7 +58,23 @@ bool CefBrowserHostImpl::PlatformCreateWindow() {
    */
   base::ThreadRestrictions::SetIOAllowed(true);
 
-  gfx::Size default_window_size(640, 480);
+  struct fb_var_screeninfo fb_var;
+
+  int widht, height;
+
+  int fb_fd =  open("/dev/fb0", O_RDWR);
+  if (ioctl(fb_fd, FBIOGET_VSCREENINFO, &fb_var)) {
+    LOG(WARNING) << "failed to get fb var info ( " << errno << "). Using default 640x480 size";
+    widht = 640;
+    height = 480;
+  }
+  else {
+    widht = fb_var.xres;
+    height = fb_var.yres;
+  }
+  gfx::Size default_window_size(widht, height);
+
+  close(fb_fd);
 
   aura::TestScreen* screen = aura::TestScreen::Create(gfx::Size());
 
